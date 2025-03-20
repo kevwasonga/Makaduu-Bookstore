@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    {% if not user.verified_publisher %}
+        <div class="alert alert-warning">
+            Your publisher account is pending verification. Some features may be limited.
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Publisher Profile</h5>
+                    <p class="card-text">{{ user.company_name }}</p>
+                    <a href="{% url 'accounts:publisher_profile_update' %}" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Stats</h5>
+                    <p>Published Books: {{ published_books.count }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="card-title">My Books</h3>
+                        <a href="{% url 'books:book-create' %}" class="btn btn-success">Add New Book</a>
+                    </div>
+
+                    {% if published_books %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Status</th>
+                                        <th>Added</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for book in published_books %}
+                                    <tr>
+                                        <td>{{ book.title }}</td>
+                                        <td>{{ book.get_status_display }}</td>
+                                        <td>{{ book.created_at|date }}</td>
+                                        <td>
+                                            <a href="{% url 'books:book-update' book.slug %}" class="btn btn-sm btn-primary">Edit</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted">You haven't published any books yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
