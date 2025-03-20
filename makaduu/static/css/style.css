@@ -1,0 +1,25 @@
+/* Custom styles */
+.hero-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.featured-books {
+    padding: 60px 0;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+footer {
+    margin-top: auto;
+}
