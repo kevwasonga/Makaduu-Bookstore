@@ -13,7 +13,7 @@ urlpatterns = [
         template_name='accounts/login.html',
         authentication_form=CustomAuthenticationForm
     ), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='core:home'), name='logout'),
     path('publisher/dashboard/', views.publisher_dashboard, name='publisher_dashboard'),
     path('publisher/profile/update/', views.PublisherProfileUpdate.as_view(), name='publisher_profile_update'),
 ]

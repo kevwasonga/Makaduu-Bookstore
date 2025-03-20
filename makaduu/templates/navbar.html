@@ -29,7 +29,12 @@
                                 <li><a class="dropdown-item" href="{% url 'accounts:register_publisher' %}">Become a Publisher</a></li>
                             {% endif %}
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a></li>
+                            <li>
+                                <form method="post" action="{% url 'accounts:logout' %}" class="dropdown-item p-0">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
                 {% else %}
